@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-mowgli
+  labels:
+    app: svc-r-stg-backup-usc-1b
+    role: demo
+    pool: test-server
+    type: pythno
+spec:
+  type: LoadBalancer
+  ports:
+    # the port that this service should serve on
+  - port: 30922
+  selector:
+    app: mowgli
+    role: demo
+    pool: test-server
+    type: python

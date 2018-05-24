@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mowgli
+  # from the labels you can target pods/services/deployments
+  labels:
+    app: mowgli
+    role: demo
+    pool: test-server
+    type: python
+spec:
+  # this replicas value
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mowgli
+        role: demo
+        pool: test-server
+        type: python
+    spec:
+      containers:
+      - name: mowgli
+        image: IMAGE_NAME
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 200m
+            memory: 200Mi
+        env:
+        - name: GET_HOSTS_FROM
+          value: dns
+        - name: ENV1
+          value: Heyy !!!!
+        - name: ENV2
+          value: Dude chilll it is not 90s
+
+      nodeSelector:
+        cloud.google.com/gke-nodepool: default-pool
+          # If your cluster config does not include a dns service, then to
+          # instead access an environment variable to find the master
+          # service's host, comment out the 'value: dns' line above, and
+          # uncomment the line below.
+          # value: env
