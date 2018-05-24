@@ -1,15 +1,15 @@
 steps:
 - id: 'build mogli image'
   name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/$REPO_NAME/$BRANCH_NAME:$SHORT_SHA', '.']
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA', '.']
 
 - id: 'push mowgli image'
   name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/$REPO_NAME/$BRANCH_NAME:$SHORT_SHA']
+  args: ['push', 'gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA']
 
 - id: 'set mowgli image in yamls'
   name: 'ubuntu'
-  args: ['bash','-c','sed -i "s,IMAGE_NAME,gcr.io/$PROJECT_ID/$REPO_NAME/$BRANCH_NAME:$SHORT_SHA," deploy-mowgli.yaml']
+  args: ['bash','-c','sed -i "s,IMAGE_NAME,gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA," deploy-mowgli.yaml']
 
 - id: kubectl-apply deployment
   name: 'gcr.io/cloud-builders/kubectl'
@@ -17,7 +17,7 @@ steps:
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=wolves-pack'
-#images: ['gcr.io/$PROJECT_ID/$REPO_NAME/$BRANCH_NAME:$SHORT_SHA']
+#images: ['gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA']
 - id: kubectl-apply services
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'service-mowgli.yaml']
