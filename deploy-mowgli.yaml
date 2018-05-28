@@ -35,7 +35,7 @@ spec:
         - name: ENV1
           value: Heyy !!!!
         - name: ENV2
-          value: Dude chilll it is not 90s
+          value: Dude chilll it is not 90s.. Okay.. Whatsaupppppppppppp
 
       nodeSelector:
         cloud.google.com/gke-nodepool: default-pool
