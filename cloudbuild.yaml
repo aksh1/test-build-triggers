@@ -11,14 +11,14 @@ steps:
   name: 'ubuntu'
   args: ['bash','-c','sed -i "s,IMAGE_NAME,gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA," deploy-mowgli.yaml']
 
-- id: kubectl-apply deployment
+- id: kubectl apply deployment
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'deploy-mowgli.yaml']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=wovles-pack'
 #images: ['gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA']
-- id: kubectl-apply services
+- id: kubectl apply services
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'service-mowgli.yaml']
   env:
