@@ -35,7 +35,7 @@ spec:
         - name: ENV1
           value: Heyy !!!!
         - name: ENV2
-          value: Dude YAyyyyyyyyyyyyyyyyyy
+          value: HEYYYYYYYYYYYYYYYYY FEMIIIIIIIIIIIIIIIIIII
 
       nodeSelector:
         cloud.google.com/gke-nodepool: default-pool
